@@ -37,6 +37,7 @@ def live_user_emotion():
         
                 emotions = ('angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral')  
                 predicted_emotion = emotions[max_index]
+                predicted_emotion1 = emotions[max_index]
                 #print("predicted_emotion:",predicted_emotion) 
             
                 cv2.putText(test_img, predicted_emotion, (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
@@ -45,4 +46,8 @@ def live_user_emotion():
         
         cap.release()  
         cv2.destroyAllWindows
-        return predicted_emotion
+        return predicted_emotion, predicted_emotion1
+
+if __name__=='__main__':
+    live_user_emotion=live_user_emotion()
+    print("Emotion:",live_user_emotion[0])

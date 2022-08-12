@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import tensorflow as tf
 from keras.models import load_model
-#from spotify_api import songs_by_emotion
+
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
@@ -13,20 +13,30 @@ cascade = cv2.CascadeClassifier(facedata)
 
 model = load_model('model_weights.h5')
 
-playlist_limit = 1
+playlist_limit = 3
 song_limit_per_playlist = 2
 
 def songs_by_emotion(emotion):
     results = sp.search(q=emotion,type='playlist', limit=playlist_limit)
-    
+    gs = []
     for el in results['playlists']['items']:
         temp = {}
         temp['playlist_name'] = el['name']
         temp['playlist_href'] = el['href']
         temp['playlist_id'] = el['id']
         temp['playlist_spotify_link'] = el['external_urls']['spotify']
-        print(temp['playlist_spotify_link'])
-    return temp['playlist_spotify_link']
+        gs.append(temp)
+    fnl_playlist_songs = gs
+    
+    for i in range(0,len(gs)):
+        res = sp.playlist(playlist_id = gs[i]['playlist_id'])
+        srn = res['tracks']['items'][0:song_limit_per_playlist]
+        tlist = []
+        for el in srn:
+            tlist.append(el['track']['name'])
+        fnl_playlist_songs[i]['playlist_songs'] = tlist
+
+    return fnl_playlist_songs
 
 class Video(object):
     def __init__(self):
@@ -62,9 +72,9 @@ class Video(object):
             
                 cv2.putText(frame, predicted_emotion, (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
                 cv2.putText(frame, str(round(predictions_accuracy*100, 2))+"%", (180, 75), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0,0,255), 2)
-                songs_by_emotion(predicted_emotion)
                 #print("predicted_emotion:",playlist_link)
 
         ret,jpg=cv2.imencode('.jpg',frame)
         return jpg.tobytes()
+
 

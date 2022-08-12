@@ -1,0 +1,28 @@
+{% extends 'homepage.html' %}
+{% block content %}
+
+<!-- Video Frame -->
+<h1 style="text-align: center;">FACE EMOTION RECOGNITION</h1>
+
+<div style="vertical-align:middle; margin:0px auto; width:50%; float: left;">
+    <img src="{{ url_for('video') }}" style="border:5px solid black" alt="Video">
+    <br>
+    <div class="input_field">
+        <h2 style='color: #110e04'> Click below Button to display Song based on Emotion</h2>
+        <div class="break"></div>
+            <div class="ml-container">
+                <a href="/recommend"><input   class='button1' form='form1' value='Get Song recommendations!' type="submit"></a>
+            </div>
+    </div>
+</div>
+
+<div style="text-align:middle; margin:0px auto; width:50%; float: right;" class='container'>
+    <!-- Results Block -->
+    <div style="float:right;" class="results">
+        {% block results %}
+            
+        {% endblock %}
+    </div>
+</div>
+
+{% endblock %}
