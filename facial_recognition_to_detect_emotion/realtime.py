@@ -40,7 +40,7 @@ def songs_by_emotion(emotion):
 
 class Video(object):
     def __init__(self):
-        self.video=cv2.VideoCapture(0)
+        self.video=cv2.VideoCapture(0)        
     def __del__(self):
         self.video.release()
     def get_frame(self):
@@ -67,13 +67,10 @@ class Video(object):
                 max_index = np.argmax(predictions[0])  
         
                 emotions = ('angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral')  
-                predicted_emotion = emotions[max_index]
-                #print("predicted_emotion:",predicted_emotion)
+                self.predicted_emotion = emotions[max_index]
             
-                cv2.putText(frame, predicted_emotion, (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
+                cv2.putText(frame, self.predicted_emotion, (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
                 cv2.putText(frame, str(round(predictions_accuracy*100, 2))+"%", (180, 75), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0,0,255), 2)
-                #print("predicted_emotion:",playlist_link)
-
         ret,jpg=cv2.imencode('.jpg',frame)
         return jpg.tobytes()
 
