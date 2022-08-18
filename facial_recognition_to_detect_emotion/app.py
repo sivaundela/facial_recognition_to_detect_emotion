@@ -1,5 +1,4 @@
-from flask import Flask, Response , render_template, request
-import requests
+from flask import Flask, Response , render_template
 from realtime import Video, songs_by_emotion
 
 app=Flask(__name__)
@@ -28,6 +27,7 @@ def recommend():
     playlist_2 = playlist_details[1]
     playlist_3 = playlist_details[2]
     # songs_list = songs_list[4]
-    return render_template('results.html',playlist_details=playlist_details, playlist_1=playlist_1, playlist_2=playlist_2,playlist_3=playlist_3,predicted_emotion=v.predicted_emotion)
+    return render_template('results.html',playlist_details=playlist_details, playlist_1=playlist_1, playlist_2=playlist_2,
+                                                                    playlist_3=playlist_3,predicted_emotion=v.predicted_emotion)
 
 app.run(debug=True)
