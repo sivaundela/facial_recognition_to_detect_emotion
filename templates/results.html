@@ -1,0 +1,65 @@
+{% extends "video.html" %}
+
+{% block results %}
+<style>
+    table, th, td {
+      border: 1px solid black;
+    }
+    .table a
+    {
+        display:block;
+        text-decoration:none;
+    }
+</style>
+
+<h3>RECOGNISED FACE EMOTION: "{{predicted_emotion}}" </h3>
+
+<h4 style='color: #1c1a1a'>Song Recommandation based on Emotion</h4>
+
+<table>
+    <h3> Playlist 1 </h3>
+    <tr>
+        <th> Playlist Name </th>
+        <td> {{playlist_1['playlist_name']}} </td>
+    </tr>
+    <tr>
+        <th> Playlist Link </th>
+        <td><a href="{{playlist_1['playlist_spotify_link']}}">{{playlist_1['playlist_spotify_link']}}</a></td>
+    <tr>
+    </tr>
+        <th> Playlist Songs </th>
+        <td> {{playlist_1['playlist_songs']}} </td>
+    </tr>
+</table>
+<table>
+    <h3> Playlist 2 </h3>
+    <tr>
+        <th> Playlist Name </th>
+        <td> {{playlist_2['playlist_name']}} </td>
+    </tr>
+    <tr>
+        <th> Playlist Link </th>
+        <td><a href="{{playlist_2['playlist_spotify_link']}}">{{playlist_2['playlist_spotify_link']}}</a></td>
+    <tr>
+    </tr>
+        <th> Playlist Songs </th>
+        <td> {{playlist_2['playlist_songs']}} </td>
+    </tr>
+</table>
+<table>
+    <h3> Playlist 3 </h3>
+    <tr>
+        <th> Playlist Name </th>
+        <td> {{playlist_3['playlist_name']}} </td>
+    </tr>
+    <tr>
+        <th> Playlist Link </th>
+        <td><a href="{{playlist_3['playlist_spotify_link']}}">{{playlist_3['playlist_spotify_link']}}</a></td>
+    <tr>
+    </tr>
+        <th> Playlist Songs </th>
+        <td> {{playlist_3['playlist_songs']}} </td>
+    </tr>
+</table>
+
+{% endblock %}
